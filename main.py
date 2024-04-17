@@ -72,14 +72,14 @@ class SeleniumUse:
         for handle in self._driver.window_handles:
             self._driver.switch_to.window(handle)
             link = self._driver.current_url 
-            if "https://hub.xpi.com.br/new/relatorios/#/relatorios-gerencias" in link:
+            if os.getenv("PRIVATE_LINK") in link:
                 break
     
     def open_diver(self):
         self.hub_verify()
         
         driver = self._driver
-        driver.get("https://hub.xpi.com.br/new/relatorios/#/relatorios-gerencias")
+        driver.get(os.getenv("PRIVATE_LINK"))
         driver.refresh()
 
 
@@ -92,7 +92,7 @@ mes = dois_dias.strftime("%Y%m")
 
 if __name__ == "__main__":
     
-    PATH = r"C:\Users\dougl\OneDrive\Documentos\chromedriver.exe"
+    PATH = os.getenv("PATH_CHROMEDRIVER")
     service = Service(executable_path=PATH)
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')

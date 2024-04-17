@@ -1,6 +1,10 @@
 import cv2
 import pyautogui
 import numpy as np
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 # Global variables
 drawing = False  # True if mouse is pressed
 ix, iy = -1, -1  # Initial coordinates of the mouse pointer
@@ -21,7 +25,7 @@ def draw_rectangle(event, x, y, flags, param):
 
         # Crop and save the region of interest
         cropped_image = img[iy:y, ix:x]
-        cv2.imwrite(fr'C:\Programas BI\OpenCv\dep_img\cropped_{i}.png', cropped_image)
+        cv2.imwrite(os.path.join(os.getenv("PATH_PASTA"),fr'cropped_{i}.png'), cropped_image)
         print("Cropped image saved successfully.")
 
 # Read an image
